@@ -1,0 +1,23 @@
+<!-- templates/dashboard.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ダッシュボード</title>
+    <style>
+        .container { max-width: 800px; margin: 50px auto; padding: 20px; }
+        .header { display: flex; justify-content: space-between; align-items: center; }
+        .logout-btn { padding: 8px 16px; background-color: #dc3545; color: white; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>ようこそ、{{ user.name }}さん</h1>
+            <a href="{{ url_for('logout') }}" class="logout-btn">ログアウト</a>
+        </div>
+        <div class="content">
+            <p>これはメインページです。ここにコンテンツを追加してください。</p>
+        </div>
+    </div>
+</body>
+</html>
