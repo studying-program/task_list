@@ -1,24 +1,9 @@
-<!-- templates/index.html -->
-<!DOCTYPE html>
-<html>
-<head>
-    <title>シンプルメモアプリ</title>
-</head>
-<body>
-    <h1>シンプルメモアプリ</h1>
-    
-    <!-- メモ入力フォーム -->
-    <form action="/add_memo" method="post">
-        <input type="text" name="memo" placeholder="メモを入力">
-        <button type="submit">追加</button>
-    </form>
+{% extends'base.html' %}
 
-    <!-- メモ一覧 -->
-    <h2>メモ一覧</h2>
-    <ul>
-        {% for memo in memos %}
-            <li>{{ memo }}</li>
+{% block body %}
+    <h1>Top Page</h1>
+        {% for post in posts %}
+            <h2>Title:{{post.title}}</h2>
+            <p>期限:{{post.due.date()}}</p>
         {% endfor %}
-    </ul>
-</body>
-</html>
+{% endblock %}
