@@ -1,9 +1,50 @@
 {% extends'base.html' %}
 
 {% block body %}
-    <h1>Top Page</h1>
+<div class="container">
+    <h1 class="my-4">タスク一覧</h1>
+    
+    <!-- タグによる絞り込み -->
+    <div class="mb-4">
+        <h5>タグで絞り込み:</h5>
+        <div class="d-flex flex-wrap gap-2">
+            <a href="/" class="btn btn-outline-primary btn-sm">すべて表示</a>
+            {% for tag in tags %}
+                <a href="/?tag={{ tag.name }}" class="btn btn-outline-secondary btn-sm">{{ tag.name }}</a>
+            {% endfor %}
+        </div>
+    </div>
+
+    <a href="/create" class="btn btn-primary mb-3">新規作成</a>
+    <a href="/tags" class="btn btn-secondary mb-3 ms-2">タグ管理</a>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>タイトル</th>
+                <th>期限</th>
+                <th>タグ</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
         {% for post in posts %}
-            <h2>Title:{{post.title}}</h2>
-            <p>期限:{{post.due.date()}}</p>
+            <tr>
+                <td>{{ post.title }}</td>
+                <td>{{ post.due.date() }}</td>
+                <td>
+                    {% for tag in post.tags %}
+                        <span class="badge bg-secondary">{{ tag.name }}</span>
+                    {% endfor %}
+                </td>
+                <td>
+                    <a href="/detail/{{ post.id }}" class="btn btn-info btn-sm">詳細</a>
+                    <a href="/update/{{ post.id }}" class="btn btn-success btn-sm">編集</a>
+                    <a href="/delete/{{ post.id }}" class="btn btn-danger btn-sm">削除</a>
+                </td>
+            </tr>
         {% endfor %}
+        </tbody>
+    </table>
+</div>
 {% endblock %}

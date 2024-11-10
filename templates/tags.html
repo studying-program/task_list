@@ -1,0 +1,36 @@
+{% extends'base.html' %}
+
+{% block body %}
+<div class="container">
+    <h1 class="my-4">タグ管理</h1>
+    
+    <!-- 新規タグ作成フォーム -->
+    <form action="/tags" method="post" class="mb-4">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="input-group">
+                    <input type="text" class="form-control" name="tag_name" placeholder="新しいタグ名" required>
+                    <button type="submit" class="btn btn-primary">タグを追加</button>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <!-- タグ一覧 -->
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">既存のタグ</h5>
+            <div class="d-flex flex-wrap gap-2">
+                {% for tag in tags %}
+                    <div class="d-flex align-items-center bg-light rounded p-2">
+                        <span class="me-2">{{ tag.name }}</span>
+                        <a href="/tag/delete/{{ tag.id }}" class="btn btn-danger btn-sm">削除</a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <a href="/" class="btn btn-secondary mt-3">戻る</a>
+</div>
+{% endblock %}

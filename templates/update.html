@@ -2,26 +2,27 @@
 
 {% block body %}
 <div class="container">
-    <h1 class="my-4">新規作成</h1>
-    <form action="/" method="post">
+    <h1 class="my-4">編集</h1>
+    <form action="/update/{{ post.id }}" method="post">
         <div class="mb-3">
             <label for="title" class="form-label">タイトル</label>
-            <input type="text" class="form-control" name="title" required>
+            <input type="text" class="form-control" name="title" value="{{ post.title }}" required>
         </div>
         <div class="mb-3">
             <label for="detail" class="form-label">詳細</label>
-            <input type="text" class="form-control" name="detail">
+            <input type="text" class="form-control" name="detail" value="{{ post.detail }}">
         </div>
         <div class="mb-3">
             <label for="due" class="form-label">期限</label>
-            <input type="date" class="form-control" name="due" required>
+            <input type="date" class="form-control" name="due" value="{{ post.due.date() }}" required>
         </div>
         <div class="mb-3">
-            <label class="form-label">既存のタグ</label>
+            <label class="form-label">タグ</label>
             <div class="d-flex flex-wrap gap-2">
                 {% for tag in tags %}
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="tags" value="{{ tag.name }}" id="tag{{ tag.id }}">
+                    <input class="form-check-input" type="checkbox" name="tags" value="{{ tag.name }}" 
+                           id="tag{{ tag.id }}" {% if tag in post.tags %}checked{% endif %}>
                     <label class="form-check-label" for="tag{{ tag.id }}">
                         {{ tag.name }}
                     </label>
@@ -34,7 +35,7 @@
             <input type="text" class="form-control" name="tags" placeholder="仕事,緊急,家族">
         </div>
         <a href="/" class="btn btn-secondary">戻る</a>
-        <button type="submit" class="btn btn-primary">作成</button>
+        <button type="submit" class="btn btn-primary">更新</button>
     </form>
 </div>
 {% endblock %}
