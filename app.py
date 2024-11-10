@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
@@ -65,6 +65,26 @@ def index():
         db.session.add(new_post)
         db.session.commit()
         return redirect('/')
+    
+
+@app.route('/archive/<int:post_id>', methods=['POST'])
+def archive_task(post_id):
+    post = Post.query.get(post_id)
+    if post:
+        # "アーカイブ"タグを取得
+        archive_tag = Tag.query.filter_by(name="アーカイブ").first()
+        if not archive_tag:
+            # "アーカイブ"タグがない場合は新たに作成
+            archive_tag = Tag(name="アーカイブ")
+            db.session.add(archive_tag)
+        
+        # タスクにアーカイブタグを追加
+        post.tags.append(archive_tag)
+        db.session.commit()
+
+    # タスク一覧にリダイレクト
+    return redirect('/')
+
 
 @app.route("/create")
 def create():

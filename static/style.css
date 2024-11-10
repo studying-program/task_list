@@ -1,0 +1,23 @@
+
+/* コンテナの横並び設定 */
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+/* タイトル、フィルタ、ボタンをまとめて配置 */
+.header-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+/* テーブル幅の設定 */
+.table-container {
+    flex-grow: 1;
+}
+
+.table {
+    width: 100%;
+}
